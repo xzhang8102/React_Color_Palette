@@ -1,7 +1,15 @@
 import React from 'react';
+import Palette from './Palette';
+import seedColor from '../seedColor';
 
-const App = () => {
-  return <div>App</div>;
-};
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Palette {...seedColor[4]} />
+      </div>
+    );
+  }
+}
 
 export default App;
