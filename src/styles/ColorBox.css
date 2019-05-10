@@ -6,6 +6,7 @@
   /* margin: 0 auto; */
   position: relative;
   text-transform: uppercase;
+  cursor: pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
