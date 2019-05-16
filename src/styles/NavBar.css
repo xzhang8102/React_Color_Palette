@@ -6,18 +6,16 @@
 }
 
 .logo {
-  margin-right: 15px;
-  padding: 0 13px;
-  font-size: 22px;
+  margin-right: 1.5rem;
+  padding: 0 1.3rem;
+  font-size: 1.8rem;
   background-color: #eceff1;
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-.logo a {
   text-decoration: none;
   color: black;
+  cursor: pointer;
 }
 
 .slider-container {
@@ -25,9 +23,9 @@
 }
 
 .slider {
-  width: 350px;
+  width: 30rem;
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 1rem;
 }
 
 .rc-slider-track {
@@ -35,7 +33,8 @@
 }
 
 .rc-slider-rail {
-  height: 8px;
+  height: 0.8rem;
+  margin-top: -0.1rem;
 }
 
 .rc-slider-handle,
@@ -44,9 +43,9 @@
 .rc-slider-handle:hover {
   background: green;
   outline: none;
-  border: 2px solid green;
+  border: 0.2rem solid green;
   box-shadow: none;
-  width: 12px;
-  height: 12px;
-  margin-top: -2px;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: -0.3rem;
 }
