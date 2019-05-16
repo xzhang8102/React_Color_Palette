@@ -49,3 +49,12 @@
   height: 1.2rem;
   margin-top: -0.3rem;
 }
+
+.select-container {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+#message-id {
+  font-size: 1.1rem;
+}
