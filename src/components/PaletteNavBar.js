@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'rc-slider';
+import { Link } from 'react-router-dom';
 import { Select, MenuItem, Snackbar, IconButton } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 
@@ -12,7 +13,9 @@ const PaletteNavBar = ({ level, onSlide, changeFormat, format }) => {
 
   return (
     <nav className="Navbar">
-      <div className="logo">Color Picker</div>
+      <div className="logo">
+        <Link to="/">Palette List</Link>
+      </div>
       <div className="slider-container">
         <span>Level: {level}</span>
         <div className="slider">

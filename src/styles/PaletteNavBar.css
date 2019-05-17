@@ -13,9 +13,11 @@
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.logo a {
   text-decoration: none;
   color: black;
-  cursor: pointer;
 }
 
 .slider-container {
