@@ -7,6 +7,12 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.ColorBox:hover {
+  top: -0.5rem;
+  left: -0.5rem;
+  box-shadow: 0.3rem 0.3rem 0.1rem grey;
+}
+
 .copy-button {
   width: 10rem;
   height: 3rem;
