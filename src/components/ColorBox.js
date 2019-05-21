@@ -20,9 +20,11 @@ const ColorBox = ({ name, background, detailedUrl }) => {
           <span>{name}</span>
         </div>
         <button className="copy-button">COPY</button>
-        <Link to={detailedUrl} onClick={e => e.stopPropagation()}>
-          <span className="see-more">More</span>
-        </Link>
+        {detailedUrl && (
+          <Link to={detailedUrl} onClick={e => e.stopPropagation()}>
+            <span className="see-more">More</span>
+          </Link>
+        )}
       </div>
     </CopyToClipboard>
   );
