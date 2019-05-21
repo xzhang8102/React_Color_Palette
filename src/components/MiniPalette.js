@@ -31,7 +31,8 @@ const styles = {
     alignItems: 'center',
     color: 'black',
     padding: '0.5rem 0 0 0',
-    fontSize: '1.2rem'
+    fontSize: '1.2rem',
+    fontWeight: '500'
   },
   emoji: {
     marginLeft: '0.8rem',
