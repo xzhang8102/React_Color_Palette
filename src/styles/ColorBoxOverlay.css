@@ -57,3 +57,8 @@
   font-weight: 100;
   letter-spacing: 0.1rem;
 }
+
+.overlay-msg .dark-text:first-child {
+  text-shadow: none;
+  background: rgba(255, 255, 255, 0.8);
+}

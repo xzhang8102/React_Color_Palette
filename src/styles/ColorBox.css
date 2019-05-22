@@ -40,7 +40,7 @@
   opacity: 1;
   text-decoration: none;
   text-transform: none;
-  background: #ecebec;
+  background: #d6d6d6;
 }
 
 .ColorBox:hover .copy-button {
@@ -67,4 +67,12 @@
   padding: 0.6rem 1.2rem;
   text-align: center;
   font-size: 0.8rem;
+}
+
+.light-text {
+  color: white;
+}
+
+.dark-text {
+  color: rgba(0, 0, 0, 0.7);
 }
