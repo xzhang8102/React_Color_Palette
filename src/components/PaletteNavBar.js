@@ -7,7 +7,13 @@ import { Close } from '@material-ui/icons';
 import 'rc-slider/assets/index.css';
 import '../styles/PaletteNavBar.css';
 
-const PaletteNavBar = ({ level, onSlide, changeFormat, format }) => {
+const PaletteNavBar = ({
+  level,
+  onSlide,
+  changeFormat,
+  format,
+  showSlider
+}) => {
   // set the switch for the format selector
   const [open, setOpen] = useState(false);
 
@@ -16,18 +22,20 @@ const PaletteNavBar = ({ level, onSlide, changeFormat, format }) => {
       <div className="logo">
         <Link to="/">Palette List</Link>
       </div>
-      <div className="slider-container">
-        <span>Level: {level}</span>
-        <div className="slider">
-          <Slider
-            defaultValue={500}
-            min={100}
-            max={900}
-            step={100}
-            onAfterChange={onSlide}
-          />
+      {showSlider && (
+        <div className="slider-container">
+          <span>Level: {level}</span>
+          <div className="slider">
+            <Slider
+              defaultValue={500}
+              min={100}
+              max={900}
+              step={100}
+              onAfterChange={onSlide}
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="select-container">
         <Select
           value={format}

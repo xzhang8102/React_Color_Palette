@@ -7,13 +7,18 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.SingleColorPalette .ColorBox {
+  height: 50%;
+}
+
 .ColorBox:hover {
   top: -0.5rem;
   left: -0.5rem;
   box-shadow: 0.3rem 0.3rem 0.1rem grey;
 }
 
-.copy-button {
+.copy-button,
+.back-button {
   width: 10rem;
   height: 3rem;
   position: absolute;
@@ -29,6 +34,13 @@
   opacity: 0;
   cursor: pointer;
   backface-visibility: hidden;
+}
+
+.back-button {
+  opacity: 1;
+  text-decoration: none;
+  text-transform: none;
+  background: #ecebec;
 }
 
 .ColorBox:hover .copy-button {

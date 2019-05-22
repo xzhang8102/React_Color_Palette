@@ -38,6 +38,7 @@ class Palette extends React.Component {
           level={this.state.level}
           changeFormat={this.changeFormat}
           format={this.state.format}
+          showSlider
         />
         <div className="Palette-colors">{colorBoxList}</div>
         <PaletteFooter paletteName={paletteName} emoji={emoji} />
