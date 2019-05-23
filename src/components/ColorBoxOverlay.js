@@ -1,22 +1,26 @@
 import React from 'react';
-import chroma from 'chroma-js';
-import '../styles/ColorBoxOverlay.css';
+import { withStyles } from '@material-ui/styles';
+import styles from '../styles/ColorBoxOverlayStyles';
 
-const ColorBoxOverLay = ({ copied, color }) => {
-  const isLight = chroma(color).luminance() >= 0.608;
-
+const ColorBoxOverLay = ({ copied, color, classes }) => {
   return (
     <>
       <div
         style={{ background: color }}
-        className={`copy-overlay ${copied && 'show'}`}
+        className={`${classes.copyOverlay} ${
+          copied ? classes.showOverlay : undefined
+        }`}
       />
-      <div className={`overlay-msg ${copied && 'show'}`}>
-        <h1 className={isLight ? 'dark-text' : undefined}>COPIED</h1>
-        <p className={isLight ? 'dark-text' : undefined}>{color}</p>
+      <div
+        className={`${classes.overlayMsg} ${
+          copied ? classes.showOverlayMsg : undefined
+        }`}
+      >
+        <h1>COPIED</h1>
+        <p>{color}</p>
       </div>
     </>
   );
 };
 
-export default ColorBoxOverLay;
+export default withStyles(styles)(ColorBoxOverLay);
