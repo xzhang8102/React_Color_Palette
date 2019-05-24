@@ -2,30 +2,31 @@ import React, { useState } from 'react';
 import Slider from 'rc-slider';
 import { Link } from 'react-router-dom';
 import { Select, MenuItem, Snackbar, IconButton } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import { Close } from '@material-ui/icons';
-
 import 'rc-slider/assets/index.css';
-import '../styles/PaletteNavBar.css';
+import styles from '../styles/PaletteNavBarStyles';
 
 const PaletteNavBar = ({
   level,
   onSlide,
   changeFormat,
   format,
-  showSlider
+  showSlider,
+  classes
 }) => {
   // set the switch for the format selector
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="Navbar">
-      <div className="logo">
+    <nav className={classes.navbar}>
+      <div className={classes.logo}>
         <Link to="/">Palette List</Link>
       </div>
       {showSlider && (
-        <div className="slider-container">
+        <div className={classes.sliderContainer}>
           <span>Level: {level}</span>
-          <div className="slider">
+          <div className={classes.slider}>
             <Slider
               defaultValue={500}
               min={100}
@@ -36,7 +37,7 @@ const PaletteNavBar = ({
           </div>
         </div>
       )}
-      <div className="select-container">
+      <div className={classes.selectContainer}>
         <Select
           value={format}
           onChange={e => {
@@ -54,7 +55,9 @@ const PaletteNavBar = ({
         open={open}
         autoHideDuration={1500}
         message={
-          <span id="message-id">Format Changed To {format.toUpperCase()}</span>
+          <span id="message-id" style={{ fontSize: '1.1rem' }}>
+            Format Changed To {format.toUpperCase()}
+          </span>
         }
         ContentProps={{
           'aria-describedby': 'message-id'
@@ -75,4 +78,4 @@ const PaletteNavBar = ({
   );
 };
 
-export default PaletteNavBar;
+export default withStyles(styles)(PaletteNavBar);

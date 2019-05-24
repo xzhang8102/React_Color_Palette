@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { withStyles } from '@material-ui/styles';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import SingleColorPalette from './SingleColorPalette';
 import seedColor from '../seedColor';
 import { generatePalette } from '../colorVariation';
-import '../styles/App.css';
+import styles from '../styles/AppStyles';
 
 class App extends React.Component {
   findPalette(id) {
@@ -54,4 +55,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
