@@ -2,7 +2,7 @@ export default {
   root: {
     backgroundColor: 'white',
     borderRadius: '.5rem',
-    padding: '0.8rem',
+    padding: '0.8rem 0.8rem 0 0.8rem',
     border: '1px solid black',
     '&:hover': {
       cursor: 'pointer'
@@ -27,9 +27,10 @@ export default {
     justifyContent: 'space-between',
     alignItems: 'center',
     color: 'black',
-    padding: '0.5rem 0 0 0',
-    fontSize: '1.2rem',
-    fontWeight: '500'
+    padding: '0.1rem 0',
+    fontSize: '1.05rem',
+    fontWeight: 'bold',
+    fontFamily: 'Roboto'
   },
   emoji: {
     marginLeft: '0.8rem',

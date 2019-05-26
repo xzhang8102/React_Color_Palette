@@ -16,8 +16,12 @@ export default {
   nav: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: '100%',
-    color: 'white'
+    color: 'white',
+    '& a': {
+      color: 'white'
+    }
   },
   palettes: {
     width: '100%',

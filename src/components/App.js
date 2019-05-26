@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
+import CreateNewPalette from './CreateNewPalette';
 import SingleColorPalette from './SingleColorPalette';
 import seedColor from '../seedColor';
 import { generatePalette } from '../colorVariation';
@@ -19,6 +20,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route exact path="/palette/new" component={CreateNewPalette} />
           <Route
             exact
             path="/"
