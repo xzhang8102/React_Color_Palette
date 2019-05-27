@@ -81,7 +81,8 @@ class CreateNewPalette extends React.Component {
     open: false,
     newColorName: '', // the name of the generated new color
     currentColor: '#cccccc', // color selected from the color picker
-    palette: [] // keep record of the user-generated color, {color: '', name: ''}
+    palette: [], // keep record of the user-generated color, {color: '', name: ''}
+    newPaletteName: ''
   };
 
   //add validator rule
@@ -91,8 +92,17 @@ class CreateNewPalette extends React.Component {
         ({ name }) => name.toLowerCase() !== value.toLowerCase()
       );
     });
-    ValidatorForm.addValidationRule('isColorUnique', value =>
+    ValidatorForm.addValidationRule('isColorUnique', () =>
       this.state.palette.every(({ color }) => color !== this.state.currentColor)
+    );
+    ValidatorForm.addValidationRule('isPaletteUnique', value =>
+      this.props.palettes.every(
+        ({ paletteName }) => value.toLowerCase() !== paletteName.toLowerCase()
+      )
+    );
+    ValidatorForm.addValidationRule(
+      'isPaletteEmpty',
+      value => this.state.palette.length
     );
   }
 
@@ -116,8 +126,10 @@ class CreateNewPalette extends React.Component {
     });
   };
 
-  handleInputColorName = e => {
-    this.setState({ newColorName: e.target.value });
+  handleInputChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   clearPalette = () => {
@@ -125,7 +137,7 @@ class CreateNewPalette extends React.Component {
   };
 
   submitPalette = () => {
-    let newPaletteName = 'New Palette';
+    let newPaletteName = this.state.newPaletteName;
     const newPalette = {
       paletteName: newPaletteName,
       id: newPaletteName.toLowerCase().replace(/s+/g, '-'),
@@ -138,7 +150,13 @@ class CreateNewPalette extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, palette, newColorName } = this.state;
+    const {
+      open,
+      currentColor,
+      palette,
+      newColorName,
+      newPaletteName
+    } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -162,13 +180,24 @@ class CreateNewPalette extends React.Component {
             <Typography variant="h6" noWrap>
               Persistent drawer
             </Typography>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.submitPalette}
-            >
-              Save Palette
-            </Button>
+            <ValidatorForm onSubmit={this.submitPalette}>
+              <TextValidator
+                label="Palette Name"
+                name="newPaletteName"
+                value={newPaletteName}
+                onChange={this.handleInputChange}
+                validators={['required', 'isPaletteUnique', 'isPaletteEmpty']}
+                errorMessages={[
+                  'This field is required',
+                  'Name existed',
+                  'Add some color in the palette first'
+                ]}
+                autoComplete="off"
+              />
+              <Button variant="contained" color="primary" type="submit">
+                Save Palette
+              </Button>
+            </ValidatorForm>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -204,7 +233,8 @@ class CreateNewPalette extends React.Component {
           <ValidatorForm onSubmit={this.updatePalette}>
             <TextValidator
               value={newColorName}
-              onChange={this.handleInputColorName}
+              name="newColorName"
+              onChange={this.handleInputChange}
               validators={['required', 'isColorNameUnique', 'isColorUnique']}
               errorMessages={[
                 'This field is required',

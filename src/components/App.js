@@ -36,6 +36,7 @@ class App extends React.Component {
             render={routeProps => (
               <CreateNewPalette
                 savePalette={this.savePalette}
+                palettes={this.state.palettes}
                 {...routeProps}
               />
             )}
