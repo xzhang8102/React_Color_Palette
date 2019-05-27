@@ -13,7 +13,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import DraggableColorBox from './DraggableColorBox';
+import { arrayMove } from 'react-sortable-hoc';
+import DraggableColorList from './DraggableColorList';
 
 const drawerWidth = 400;
 
@@ -81,7 +82,7 @@ class CreateNewPalette extends React.Component {
     open: false,
     newColorName: '', // the name of the generated new color
     currentColor: '#cccccc', // color selected from the color picker
-    palette: [], // keep record of the user-generated color, {color: '', name: ''}
+    palette: this.props.defaultPalette.colors, // keep record of the user-generated color, {color: '', name: ''}
     newPaletteName: ''
   };
 
@@ -154,6 +155,12 @@ class CreateNewPalette extends React.Component {
     };
     this.props.savePalette(newPalette);
     this.props.history.push('/');
+  };
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.setState(prevState => ({
+      palette: arrayMove(prevState.palette, oldIndex, newIndex)
+    }));
   };
 
   render() {
@@ -267,15 +274,12 @@ class CreateNewPalette extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {palette.map(color => {
-            return (
-              <DraggableColorBox
-                {...color}
-                key={color.name}
-                removeColor={this.removeColor}
-              />
-            );
-          })}
+          <DraggableColorList
+            palette={palette}
+            removeColor={this.removeColor}
+            axis="xy"
+            onSortEnd={this.onSortEnd}
+          />
         </main>
       </div>
     );
