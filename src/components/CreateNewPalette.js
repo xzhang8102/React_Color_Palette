@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DraggableColorBox from './DraggableColorBox';
 
 const drawerWidth = 400;
@@ -78,20 +79,45 @@ const styles = theme => {
 class CreateNewPalette extends React.Component {
   state = {
     open: false,
+    newColorName: '', // the name of the generated new color
     currentColor: 'purple', // color selected from the color picker
-    palette: ['purple'] // keep record of the user-generated color
+    palette: [] // keep record of the user-generated color, {color: '', name: ''}
   };
+
+  //add validator rule
+  componentDidMount() {
+    ValidatorForm.addValidationRule('isColorNameUnique', value => {
+      return this.state.palette.every(
+        ({ name }) => name.toLowerCase() !== value.toLowerCase()
+      );
+    });
+    ValidatorForm.addValidationRule('isColorUnique', value =>
+      this.state.palette.every(({ color }) => color !== this.state.currentColor)
+    );
+  }
 
   handleDrawer = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   };
 
+  // sync 'Add Color' button color with the color picker
   updateCurrentColor = newColor => {
     this.setState({ currentColor: newColor.hex });
   };
 
-  updatePalette = color => {
-    this.setState({ palette: [...this.state.palette, color] });
+  updatePalette = () => {
+    const newColor = {
+      name: this.state.newColorName,
+      color: this.state.currentColor
+    };
+    this.setState({
+      palette: [...this.state.palette, newColor],
+      newColorName: ''
+    });
+  };
+
+  handleInputColorName = e => {
+    this.setState({ newColorName: e.target.value });
   };
 
   clearPalette = () => {
@@ -100,7 +126,7 @@ class CreateNewPalette extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, palette } = this.state;
+    const { open, currentColor, palette, newColorName } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -155,14 +181,26 @@ class CreateNewPalette extends React.Component {
             color={currentColor}
             onChangeComplete={this.updateCurrentColor}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ backgroundColor: currentColor }}
-            onClick={() => this.updatePalette(currentColor)}
-          >
-            Add Color
-          </Button>
+          <ValidatorForm onSubmit={this.updatePalette}>
+            <TextValidator
+              value={newColorName}
+              onChange={this.handleInputColorName}
+              validators={['required', 'isColorNameUnique', 'isColorUnique']}
+              errorMessages={[
+                'This field is required',
+                'The color name is already existed',
+                'The color is already used'
+              ]}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ backgroundColor: currentColor }}
+              type="submit"
+            >
+              Add Color
+            </Button>
+          </ValidatorForm>
         </Drawer>
         <main
           className={clsx(classes.content, {
@@ -171,7 +209,7 @@ class CreateNewPalette extends React.Component {
         >
           <div className={classes.drawerHeader} />
           {palette.map((color, i) => {
-            return <DraggableColorBox color={color} key={i} />;
+            return <DraggableColorBox {...color} key={i} />;
           })}
         </main>
       </div>
