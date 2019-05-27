@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
+import DraggableColorBox from './DraggableColorBox';
 
 const drawerWidth = 400;
 
@@ -56,6 +57,7 @@ const styles = theme => {
     },
     content: {
       flexGrow: 1,
+      height: 'calc(100vh - 64px)', // minus the appbar height
       padding: theme.spacing(3),
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
@@ -75,16 +77,30 @@ const styles = theme => {
 
 class CreateNewPalette extends React.Component {
   state = {
-    open: false
+    open: false,
+    currentColor: 'purple', // color selected from the color picker
+    palette: ['purple'] // keep record of the user-generated color
   };
 
   handleDrawer = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   };
 
+  updateCurrentColor = newColor => {
+    this.setState({ currentColor: newColor.hex });
+  };
+
+  updatePalette = color => {
+    this.setState({ palette: [...this.state.palette, color] });
+  };
+
+  clearPalette = () => {
+    this.setState({ palette: [] });
+  };
+
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, currentColor, palette } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -125,14 +141,26 @@ class CreateNewPalette extends React.Component {
           </div>
           <Divider />
           <Typography variant="h4">Design Your Palette</Typography>
-          <Button variant="contained" color="secondary">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={this.clearPalette}
+          >
             Clear Palette
           </Button>
           <Button variant="contained" color="primary">
             Random Color
           </Button>
-          <ChromePicker onChangeComplete={newColor => console.log(newColor)} />
-          <Button variant="contained" color="primary">
+          <ChromePicker
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ backgroundColor: currentColor }}
+            onClick={() => this.updatePalette(currentColor)}
+          >
             Add Color
           </Button>
         </Drawer>
@@ -142,6 +170,9 @@ class CreateNewPalette extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
+          {palette.map((color, i) => {
+            return <DraggableColorBox color={color} key={i} />;
+          })}
         </main>
       </div>
     );
