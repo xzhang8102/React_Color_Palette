@@ -80,7 +80,7 @@ class CreateNewPalette extends React.Component {
   state = {
     open: false,
     newColorName: '', // the name of the generated new color
-    currentColor: 'purple', // color selected from the color picker
+    currentColor: '#cccccc', // color selected from the color picker
     palette: [] // keep record of the user-generated color, {color: '', name: ''}
   };
 
@@ -124,6 +124,18 @@ class CreateNewPalette extends React.Component {
     this.setState({ palette: [] });
   };
 
+  submitPalette = () => {
+    let newPaletteName = 'New Palette';
+    const newPalette = {
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/s+/g, '-'),
+      emoji: '🤣',
+      colors: this.state.palette
+    };
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
+  };
+
   render() {
     const { classes } = this.props;
     const { open, currentColor, palette, newColorName } = this.state;
@@ -132,6 +144,7 @@ class CreateNewPalette extends React.Component {
         <CssBaseline />
         <AppBar
           position="fixed"
+          color="default"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -149,6 +162,13 @@ class CreateNewPalette extends React.Component {
             <Typography variant="h6" noWrap>
               Persistent drawer
             </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.submitPalette}
+            >
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer

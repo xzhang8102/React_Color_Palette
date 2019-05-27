@@ -10,22 +10,41 @@ import { generatePalette } from '../colorVariation';
 import styles from '../styles/AppStyles';
 
 class App extends React.Component {
+  state = {
+    palettes: seedColor
+  };
+
   findPalette(id) {
-    return seedColor.find(palette => {
+    return this.state.palettes.find(palette => {
       return palette.id === id;
     });
   }
+
+  savePalette = newPalette => {
+    this.setState({
+      palettes: [...this.state.palettes, newPalette]
+    });
+  };
 
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/palette/new" component={CreateNewPalette} />
+          <Route
+            exact
+            path="/palette/new"
+            render={routeProps => (
+              <CreateNewPalette
+                savePalette={this.savePalette}
+                {...routeProps}
+              />
+            )}
+          />
           <Route
             exact
             path="/"
             render={routeProps => (
-              <PaletteList palettes={seedColor} {...routeProps} />
+              <PaletteList palettes={this.state.palettes} {...routeProps} />
             )}
           />
           <Route
