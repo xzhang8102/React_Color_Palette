@@ -132,6 +132,14 @@ class CreateNewPalette extends React.Component {
     });
   };
 
+  removeColor = colorName => {
+    this.setState({
+      palette: this.state.palette.filter(
+        color => color.name.toLowerCase() !== colorName
+      )
+    });
+  };
+
   clearPalette = () => {
     this.setState({ palette: [] });
   };
@@ -241,6 +249,7 @@ class CreateNewPalette extends React.Component {
                 'The color name is already existed',
                 'The color is already used'
               ]}
+              autoComplete="off"
             />
             <Button
               variant="contained"
@@ -258,8 +267,14 @@ class CreateNewPalette extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-          {palette.map((color, i) => {
-            return <DraggableColorBox {...color} key={i} />;
+          {palette.map(color => {
+            return (
+              <DraggableColorBox
+                {...color}
+                key={color.name}
+                removeColor={this.removeColor}
+              />
+            );
           })}
         </main>
       </div>
