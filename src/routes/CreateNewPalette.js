@@ -2,53 +2,28 @@ import React from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import arrayMove from 'array-move';
 import DraggableColorList from '../components/DraggableColorList';
-
-const drawerWidth = 400;
+import CreateNewPaletteNav from '../components/CreateNewPaletteNav';
 
 const styles = theme => {
   return {
     root: {
       display: 'flex'
     },
-    appBar: {
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
-    appBarShift: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-      transition: theme.transitions.create(['margin', 'width'], {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    },
-    menuButton: {
-      marginRight: theme.spacing(2)
-    },
-    hide: {
-      display: 'none'
-    },
     drawer: {
-      width: drawerWidth,
+      width: props => props.drawerWidth,
       flexShrink: 0
     },
     drawerPaper: {
-      width: drawerWidth
+      width: props => props.drawerWidth
     },
     drawerHeader: {
       display: 'flex',
@@ -65,7 +40,7 @@ const styles = theme => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      marginLeft: -drawerWidth
+      marginLeft: props => -props.drawerWidth
     },
     contentShift: {
       transition: theme.transitions.create('margin', {
@@ -79,15 +54,15 @@ const styles = theme => {
 
 class CreateNewPalette extends React.Component {
   static defaultProps = {
-    maxColorNums: 20
+    maxColorNums: 20,
+    drawerWidth: 400
   };
 
   state = {
     open: false,
     newColorName: '', // the name of the generated new color
     currentColor: '#cccccc', // color selected from the color picker
-    palette: this.props.palettes[0].colors, // keep record of the user-generated color, {color: '', name: ''}
-    newPaletteName: ''
+    palette: this.props.palettes[0].colors // keep record of the user-generated color, {color: '', name: ''}
   };
 
   //add validator rule
@@ -99,15 +74,6 @@ class CreateNewPalette extends React.Component {
     });
     ValidatorForm.addValidationRule('isColorUnique', () =>
       this.state.palette.every(({ color }) => color !== this.state.currentColor)
-    );
-    ValidatorForm.addValidationRule('isPaletteUnique', value =>
-      this.props.palettes.every(
-        ({ paletteName }) => value.toLowerCase() !== paletteName.toLowerCase()
-      )
-    );
-    ValidatorForm.addValidationRule(
-      'isPaletteEmpty',
-      value => this.state.palette.length
     );
   }
 
@@ -161,18 +127,6 @@ class CreateNewPalette extends React.Component {
     });
   };
 
-  submitPalette = () => {
-    let newPaletteName = this.state.newPaletteName;
-    const newPalette = {
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/s+/g, '-'),
-      emoji: '🤣',
-      colors: this.state.palette
-    };
-    this.props.savePalette(newPalette);
-    this.props.history.push('/');
-  };
-
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState(prevState => ({
       palette: arrayMove(prevState.palette, oldIndex, newIndex)
@@ -180,65 +134,20 @@ class CreateNewPalette extends React.Component {
   };
 
   render() {
-    const { classes, maxColorNums } = this.props;
-    const {
-      open,
-      currentColor,
-      palette,
-      newColorName,
-      newPaletteName
-    } = this.state;
+    const { classes, maxColorNums, drawerWidth } = this.props;
+    const { open, currentColor, palette, newColorName } = this.state;
     const paletteIsFull = palette.length >= maxColorNums;
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          color="default"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
-        >
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawer}
-              edge="start"
-              className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-              Persistent drawer
-            </Typography>
-            <ValidatorForm onSubmit={this.submitPalette}>
-              <TextValidator
-                label="Palette Name"
-                name="newPaletteName"
-                value={newPaletteName}
-                onChange={this.handleInputChange}
-                validators={['required', 'isPaletteUnique', 'isPaletteEmpty']}
-                errorMessages={[
-                  'This field is required',
-                  'Name existed',
-                  'Add some color in the palette first'
-                ]}
-                autoComplete="off"
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Save Palette
-              </Button>
-              <Button
-                onClick={() => this.props.history.push('/')}
-                variant="contained"
-                color="secondary"
-              >
-                Go Back
-              </Button>
-            </ValidatorForm>
-          </Toolbar>
-        </AppBar>
+        <CreateNewPaletteNav
+          open={open}
+          handleDrawer={this.handleDrawer}
+          palette={palette}
+          palettes={this.props.palettes}
+          history={this.props.history}
+          savePalette={this.props.savePalette}
+          drawerWidth={drawerWidth}
+        />
         <Drawer
           className={classes.drawer}
           variant="persistent"
