@@ -5,7 +5,8 @@ const styles = {
   paletteColors: {
     height: '90%',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    alignContent: 'flex-start'
   }
 };
 

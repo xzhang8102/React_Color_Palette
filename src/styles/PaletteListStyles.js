@@ -9,9 +9,7 @@ export default {
   container: {
     width: '50%',
     display: 'flex',
-    alignItems: 'flex-start',
-    flexDirecetion: 'column',
-    flexWrap: 'wrap'
+    flexDirection: 'column'
   },
   nav: {
     display: 'flex',
@@ -26,7 +24,8 @@ export default {
   palettes: {
     width: '100%',
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 30%)',
-    gridGap: '5%'
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridColumnGap: '8%',
+    gridRowGap: '5%'
   }
 };

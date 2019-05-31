@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import { arrayMove } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 import DraggableColorList from './DraggableColorList';
 
 const drawerWidth = 400;
@@ -78,11 +78,15 @@ const styles = theme => {
 };
 
 class CreateNewPalette extends React.Component {
+  static defaultProps = {
+    maxColorNums: 20
+  };
+
   state = {
     open: false,
     newColorName: '', // the name of the generated new color
     currentColor: '#cccccc', // color selected from the color picker
-    palette: this.props.defaultPalette.colors, // keep record of the user-generated color, {color: '', name: ''}
+    palette: this.props.palettes[0].colors, // keep record of the user-generated color, {color: '', name: ''}
     newPaletteName: ''
   };
 
@@ -145,6 +149,18 @@ class CreateNewPalette extends React.Component {
     this.setState({ palette: [] });
   };
 
+  addRandomColor = () => {
+    const allColors = this.props.palettes.map(palette => palette.colors).flat();
+    const unique = new Set(this.state.palette.map(color => color.name));
+    let rand;
+    do {
+      rand = Math.round(Math.random() * allColors.length);
+    } while (unique.has(allColors[rand].name));
+    this.setState({
+      palette: [...this.state.palette, allColors[rand]]
+    });
+  };
+
   submitPalette = () => {
     let newPaletteName = this.state.newPaletteName;
     const newPalette = {
@@ -164,7 +180,7 @@ class CreateNewPalette extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, maxColorNums } = this.props;
     const {
       open,
       currentColor,
@@ -172,6 +188,7 @@ class CreateNewPalette extends React.Component {
       newColorName,
       newPaletteName
     } = this.state;
+    const paletteIsFull = palette.length >= maxColorNums;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -238,7 +255,12 @@ class CreateNewPalette extends React.Component {
           >
             Clear Palette
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.addRandomColor}
+            disabled={paletteIsFull}
+          >
             Random Color
           </Button>
           <ChromePicker
@@ -261,10 +283,13 @@ class CreateNewPalette extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              style={{ backgroundColor: currentColor }}
+              style={{
+                backgroundColor: paletteIsFull ? '#bbbbbb' : currentColor
+              }}
               type="submit"
+              disabled={paletteIsFull}
             >
-              Add Color
+              {paletteIsFull ? 'Palette Is Full' : 'Add Color'}
             </Button>
           </ValidatorForm>
         </Drawer>

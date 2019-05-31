@@ -36,7 +36,6 @@ class App extends React.Component {
             render={routeProps => (
               <CreateNewPalette
                 savePalette={this.savePalette}
-                defaultPalette={seedColor[0]}
                 palettes={this.state.palettes}
                 {...routeProps}
               />

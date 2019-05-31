@@ -12,7 +12,8 @@ export default {
     backgroundColor: '#dae1e4',
     display: 'flex',
     flexWrap: 'wrap',
-    height: '13rem',
+    alignContent: 'flex-start',
+    height: '10rem',
     width: '100%',
     borderRadius: '0.5rem',
     overflow: 'hidden' //to show the round border of this container
