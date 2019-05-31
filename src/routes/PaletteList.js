@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';
-import MiniPalette from './MiniPalette';
+import MiniPalette from '../components/MiniPalette';
 import styles from '../styles/PaletteListStyles';
 
 class PaletteList extends Component {

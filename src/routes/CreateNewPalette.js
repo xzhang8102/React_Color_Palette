@@ -14,7 +14,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import arrayMove from 'array-move';
-import DraggableColorList from './DraggableColorList';
+import DraggableColorList from '../components/DraggableColorList';
 
 const drawerWidth = 400;
 
@@ -228,6 +228,13 @@ class CreateNewPalette extends React.Component {
               />
               <Button variant="contained" color="primary" type="submit">
                 Save Palette
+              </Button>
+              <Button
+                onClick={() => this.props.history.push('/')}
+                variant="contained"
+                color="secondary"
+              >
+                Go Back
               </Button>
             </ValidatorForm>
           </Toolbar>

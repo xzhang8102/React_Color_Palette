@@ -30,6 +30,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
+          {/* create new palette */}
           <Route
             exact
             path="/palette/new"
@@ -41,6 +42,7 @@ class App extends React.Component {
               />
             )}
           />
+          {/* front page with all snapshots of existing palette */}
           <Route
             exact
             path="/"
@@ -48,6 +50,7 @@ class App extends React.Component {
               <PaletteList palettes={this.state.palettes} {...routeProps} />
             )}
           />
+          {/* display the detailed palette page when click on the front page */}
           <Route
             exact
             path="/palette/:id"
@@ -59,6 +62,7 @@ class App extends React.Component {
               />
             )}
           />
+          {/* display the detailed color palette page when click on the palette page */}
           <Route
             exact
             path="/palette/:paletteId/:colorId"

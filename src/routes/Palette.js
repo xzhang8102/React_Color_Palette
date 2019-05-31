@@ -1,9 +1,9 @@
 import React from 'react';
-import ColorBox from './ColorBox';
+import ColorBox from '../components/ColorBox';
 import { withStyles } from '@material-ui/styles';
 import styles from '../styles/PaletteStyles';
-import PaletteNavBar from './PaletteNavBar';
-import PaletteFooter from './PaletteFooter';
+import PaletteNavBar from '../components/PaletteNavBar';
+import PaletteFooter from '../components/PaletteFooter';
 
 class Palette extends React.Component {
   state = {
