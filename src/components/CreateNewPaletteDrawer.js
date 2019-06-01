@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -8,7 +7,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import styles from '../styles/CreateNewPaletteDrawerStyles';
 
 class CreateNewPaletteDrawer extends Component {
   //add validator rule
@@ -101,4 +99,4 @@ class CreateNewPaletteDrawer extends Component {
   }
 }
 
-export default withStyles(styles)(CreateNewPaletteDrawer);
+export default CreateNewPaletteDrawer;

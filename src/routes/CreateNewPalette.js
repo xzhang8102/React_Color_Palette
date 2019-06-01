@@ -1,40 +1,14 @@
 import React from 'react';
-import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import arrayMove from 'array-move';
-import DraggableColorList from '../components/DraggableColorList';
 import CreateNewPaletteNav from '../components/CreateNewPaletteNav';
 import CreateNewPaletteDrawer from '../components/CreateNewPaletteDrawer';
-
-const styles = theme => {
-  return {
-    root: {
-      display: 'flex'
-    },
-    content: {
-      flexGrow: 1,
-      height: 'calc(100vh - 64px)', // minus the appbar height
-      padding: theme.spacing(3),
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      marginLeft: props => -props.drawerWidth
-    },
-    contentShift: {
-      transition: theme.transitions.create('margin', {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen
-      }),
-      marginLeft: 0
-    }
-  };
-};
+import CreateNewPaletteContent from '../components/CreateNewPaletteContent';
+import styles from '../styles/CreateNewPaletteStyles';
 
 class CreateNewPalette extends React.Component {
   static defaultProps = {
-    maxColorNums: 20,
-    drawerWidth: 400
+    maxColorNums: 20
   };
 
   state = {
@@ -79,7 +53,7 @@ class CreateNewPalette extends React.Component {
     const unique = new Set(this.state.palette.map(color => color.name));
     let rand;
     do {
-      rand = Math.round(Math.random() * allColors.length);
+      rand = Math.round(Math.random() * (allColors.length - 1));
     } while (unique.has(allColors[rand].name));
     this.setState({
       palette: [...this.state.palette, allColors[rand]]
@@ -89,7 +63,7 @@ class CreateNewPalette extends React.Component {
   removeColor = colorName => {
     this.setState({
       palette: this.state.palette.filter(
-        color => color.name.toLowerCase() !== colorName
+        color => color.name.toLowerCase() !== colorName.toLowerCase()
       )
     });
   };
@@ -101,22 +75,22 @@ class CreateNewPalette extends React.Component {
   };
 
   render() {
-    const { classes, maxColorNums, drawerWidth, palettes } = this.props;
+    const { classes, maxColorNums, palettes } = this.props;
     const { open, currentColor, palette, newColorName } = this.state;
     return (
       <div className={classes.root}>
         <CreateNewPaletteNav
           open={open}
+          classes={classes}
           handleDrawer={this.handleDrawer}
           palette={palette}
           palettes={palettes}
           history={this.props.history}
           savePalette={this.props.savePalette}
-          drawerWidth={drawerWidth}
         />
         <CreateNewPaletteDrawer
           open={open}
-          drawerWidth={drawerWidth}
+          classes={classes}
           maxColorNums={maxColorNums}
           palette={palette}
           palettes={palettes}
@@ -129,19 +103,13 @@ class CreateNewPalette extends React.Component {
           updateCurrentColor={this.updateCurrentColor}
           updatePalette={this.updatePalette}
         />
-        <main
-          className={clsx(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          <div className={classes.drawerHeader} />
-          <DraggableColorList
-            palette={palette}
-            removeColor={this.removeColor}
-            axis="xy"
-            onSortEnd={this.onSortEnd}
-          />
-        </main>
+        <CreateNewPaletteContent
+          open={open}
+          classes={classes}
+          palette={palette}
+          removeColor={this.removeColor}
+          onSortEnd={this.onSortEnd}
+        />
       </div>
     );
   }
