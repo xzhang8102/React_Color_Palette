@@ -10,10 +10,8 @@ import { generatePalette } from '../colorVariation';
 import styles from '../styles/AppStyles';
 
 class App extends React.Component {
-  savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
-
   state = {
-    palettes: this.savedPaletts || seedColor
+    palettes: JSON.parse(window.localStorage.getItem('palettes')) || seedColor
   };
 
   findPalette(id) {
@@ -21,6 +19,15 @@ class App extends React.Component {
       return palette.id === id;
     });
   }
+
+  deletePalette = id => {
+    this.setState(
+      prevState => ({
+        palettes: prevState.palettes.filter(palette => palette.id !== id)
+      }),
+      this.syncLocalStorage
+    );
+  };
 
   savePalette = newPalette => {
     this.setState(
@@ -32,7 +39,10 @@ class App extends React.Component {
   };
 
   syncLocalStorage = () => {
-    window.localStorage.setItem('palette', JSON.stringify(this.state.palettes));
+    window.localStorage.setItem(
+      'palettes',
+      JSON.stringify(this.state.palettes)
+    );
   };
 
   render() {
@@ -56,7 +66,11 @@ class App extends React.Component {
             exact
             path="/"
             render={routeProps => (
-              <PaletteList palettes={this.state.palettes} {...routeProps} />
+              <PaletteList
+                palettes={this.state.palettes}
+                {...routeProps}
+                deletePalette={this.deletePalette}
+              />
             )}
           />
           {/* display the detailed palette page when click on the front page */}

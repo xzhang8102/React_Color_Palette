@@ -2,10 +2,12 @@ export default {
   root: {
     backgroundColor: 'white',
     borderRadius: '.5rem',
+    position: 'relative',
+    overflow: 'hidden',
     padding: '0.8rem 0.8rem 0 0.8rem',
-    border: '1px solid black',
-    '&:hover': {
-      cursor: 'pointer'
+    cursor: 'pointer',
+    '&:hover $delete': {
+      opacity: 1
     }
   },
   snapShot: {
@@ -36,5 +38,20 @@ export default {
   emoji: {
     marginLeft: '0.8rem',
     fontSize: '1.6rem'
+  },
+  delete: {
+    opacity: 0,
+    transition: 'all 0.3s ease-in-out'
+  },
+  deleteIcon: {
+    color: 'white',
+    backgroundColor: '#eb3d30',
+    width: '2rem',
+    height: '2rem',
+    padding: '.3rem',
+    zIndex: 20,
+    position: 'absolute',
+    right: 0,
+    top: 0
   }
 };
