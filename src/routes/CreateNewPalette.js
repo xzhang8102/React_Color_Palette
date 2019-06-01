@@ -72,7 +72,6 @@ class CreateNewPalette extends React.Component {
         />
         <CreateNewPaletteDrawer
           open={open}
-          classes={classes}
           maxColorNums={maxColorNums}
           palette={palette}
           handleDrawer={this.handleDrawer}

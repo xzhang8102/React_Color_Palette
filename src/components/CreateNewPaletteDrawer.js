@@ -1,12 +1,60 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
+const drawerWidth = 400;
+
+const styles = theme => ({
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    display: 'flex',
+    alignItems: 'center'
+  },
+  drawerHeader: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    padding: '0 8px',
+    ...theme.mixins.toolbar
+  },
+  container: {
+    width: '90%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttons: {
+    width: '100%'
+  },
+  button: {
+    width: '50%'
+  },
+  colorPicker: {
+    marginTop: '1rem'
+  },
+  colorNameInput: {
+    width: '100%'
+  },
+  addColorButton: {
+    width: '100%',
+    fontSize: '1.5rem',
+    padding: '0.5rem',
+    margin: '1rem 0'
+  }
+});
 
 class CreateNewPaletteDrawer extends Component {
   state = {
@@ -75,51 +123,69 @@ class CreateNewPaletteDrawer extends Component {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
-        <Typography variant="h4">Design Your Palette</Typography>
-        <Button variant="contained" color="secondary" onClick={clearPalette}>
-          Clear Palette
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={addRandomColor}
-          disabled={paletteIsFull}
-        >
-          Random Color
-        </Button>
-        <ChromePicker
-          color={currentColor}
-          onChangeComplete={this.updateCurrentColor}
-        />
-        <ValidatorForm onSubmit={this.addNewColor}>
-          <TextValidator
-            value={newColorName}
-            name="newColorName"
-            onChange={this.handleInputChange}
-            validators={['required', 'isColorNameUnique', 'isColorUnique']}
-            errorMessages={[
-              'This field is required',
-              'The color name is already existed',
-              'The color is already used'
-            ]}
-            autoComplete="off"
+        <div className={classes.container}>
+          <Typography variant="h4" gutterBottom>
+            Design Your Palette
+          </Typography>
+          <div className={classes.buttons}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={clearPalette}
+              className={classes.button}
+            >
+              Clear Palette
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={addRandomColor}
+              className={classes.button}
+              disabled={paletteIsFull}
+            >
+              Random Color
+            </Button>
+          </div>
+          <ChromePicker
+            color={currentColor}
+            onChangeComplete={this.updateCurrentColor}
+            width="100%"
+            className={classes.colorPicker}
           />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              backgroundColor: paletteIsFull ? '#bbbbbb' : currentColor
-            }}
-            type="submit"
-            disabled={paletteIsFull}
-          >
-            {paletteIsFull ? 'Palette Is Full' : 'Add Color'}
-          </Button>
-        </ValidatorForm>
+          <ValidatorForm onSubmit={this.addNewColor}>
+            <TextValidator
+              value={newColorName}
+              name="newColorName"
+              label="New Color Name"
+              variant="filled"
+              margin="normal"
+              onChange={this.handleInputChange}
+              validators={['required', 'isColorNameUnique', 'isColorUnique']}
+              errorMessages={[
+                'This field is required',
+                'The color name is already existed',
+                'The color is already used'
+              ]}
+              autoComplete="off"
+              className={classes.colorNameInput}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{
+                backgroundColor: paletteIsFull ? '#bbbbbb' : currentColor
+              }}
+              type="submit"
+              disabled={paletteIsFull}
+              className={classes.addColorButton}
+            >
+              {paletteIsFull ? 'Palette Is Full' : 'Add Color'}
+            </Button>
+          </ValidatorForm>
+        </div>
       </Drawer>
     );
   }
 }
 
-export default CreateNewPaletteDrawer;
+export default withStyles(styles)(CreateNewPaletteDrawer);

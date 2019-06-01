@@ -34,7 +34,9 @@ const styles = theme => ({
   menuButton: {
     marginRight: theme.spacing(2)
   },
-  navBtns: {}
+  hide: {
+    display: 'none'
+  }
 });
 
 class CreateNewPaletteNav extends Component {
