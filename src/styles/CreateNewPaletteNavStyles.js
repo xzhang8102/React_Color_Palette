@@ -1,4 +1,4 @@
-const drawerWidth = 400;
+import { DRAWER_WIDTH as drawerWidth } from '../constants';
 
 const styles = theme => ({
   appBar: {

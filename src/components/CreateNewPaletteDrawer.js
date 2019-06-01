@@ -7,54 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
-const drawerWidth = 400;
-
-const styles = theme => ({
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth,
-    display: 'flex',
-    alignItems: 'center'
-  },
-  drawerHeader: {
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar
-  },
-  container: {
-    width: '80%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  buttons: {
-    width: '100%'
-  },
-  button: {
-    width: '50%'
-  },
-  colorPicker: {
-    marginTop: '1rem'
-  },
-  colorNameInput: {
-    width: '100%'
-  },
-  addColorButton: {
-    width: '100%',
-    fontSize: '1.5rem',
-    padding: '0.5rem',
-    margin: '1rem 0'
-  }
-});
+import styles from '../styles/CreateNewPaletteDrawerStyles';
 
 class CreateNewPaletteDrawer extends Component {
   state = {
