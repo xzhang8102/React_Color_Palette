@@ -4,13 +4,6 @@ const styles = theme => ({
   root: {
     display: 'flex'
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',

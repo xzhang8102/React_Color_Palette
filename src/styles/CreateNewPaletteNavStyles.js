@@ -5,7 +5,10 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '64px'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -17,6 +20,16 @@ const styles = theme => ({
   },
   menuButton: {
     marginRight: theme.spacing(2)
+  },
+  hide: {
+    display: 'none'
+  },
+  navBtns: {
+    display: 'flex',
+    alignItems: 'center',
+    '& button': {
+      margin: '0 1rem'
+    }
   }
 });
 
