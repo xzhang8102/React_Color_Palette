@@ -10,8 +10,10 @@ import { generatePalette } from '../colorVariation';
 import styles from '../styles/AppStyles';
 
 class App extends React.Component {
+  savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
+
   state = {
-    palettes: seedColor
+    palettes: this.savedPaletts || seedColor
   };
 
   findPalette(id) {
@@ -21,9 +23,16 @@ class App extends React.Component {
   }
 
   savePalette = newPalette => {
-    this.setState({
-      palettes: [...this.state.palettes, newPalette]
-    });
+    this.setState(
+      {
+        palettes: [...this.state.palettes, newPalette]
+      },
+      this.syncLocalStorage
+    );
+  };
+
+  syncLocalStorage = () => {
+    window.localStorage.setItem('palette', JSON.stringify(this.state.palettes));
   };
 
   render() {
