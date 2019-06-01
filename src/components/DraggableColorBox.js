@@ -24,7 +24,8 @@ const styles = {
       chroma(props.color).luminance() <= 0.066 ? 'white' : 'rgba(0,0,0,0.7)',
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'
   },
   deleteIcon: {
     transition: 'all 0.2s ease-in-out',

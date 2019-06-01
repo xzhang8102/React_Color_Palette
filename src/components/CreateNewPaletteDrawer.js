@@ -9,6 +9,11 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
 class CreateNewPaletteDrawer extends Component {
+  state = {
+    newColorName: '', // the name of the generated new color
+    currentColor: '#aaaaaa' // color selected from the color picker
+  };
+
   //add validator rule
   componentDidMount() {
     ValidatorForm.addValidationRule('isColorNameUnique', value => {
@@ -17,9 +22,31 @@ class CreateNewPaletteDrawer extends Component {
       );
     });
     ValidatorForm.addValidationRule('isColorUnique', () =>
-      this.props.palette.every(({ color }) => color !== this.props.currentColor)
+      this.props.palette.every(({ color }) => color !== this.state.currentColor)
     );
   }
+
+  handleInputChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // sync 'Add Color' button color with the color picker
+  updateCurrentColor = newColor => {
+    this.setState({ currentColor: newColor.hex });
+  };
+
+  addNewColor = () => {
+    const newColor = {
+      name: this.state.newColorName,
+      color: this.state.currentColor
+    };
+    this.props.updatePalette(newColor);
+    this.setState({
+      newColorName: ''
+    });
+  };
 
   render() {
     const {
@@ -29,13 +56,9 @@ class CreateNewPaletteDrawer extends Component {
       clearPalette,
       palette,
       maxColorNums,
-      addRandomColor,
-      currentColor,
-      newColorName,
-      handleInputChange,
-      updateCurrentColor,
-      updatePalette
+      addRandomColor
     } = this.props;
+    const { currentColor, newColorName } = this.state;
     const paletteIsFull = palette.length >= maxColorNums;
     return (
       <Drawer
@@ -67,13 +90,13 @@ class CreateNewPaletteDrawer extends Component {
         </Button>
         <ChromePicker
           color={currentColor}
-          onChangeComplete={updateCurrentColor}
+          onChangeComplete={this.updateCurrentColor}
         />
-        <ValidatorForm onSubmit={updatePalette}>
+        <ValidatorForm onSubmit={this.addNewColor}>
           <TextValidator
             value={newColorName}
             name="newColorName"
-            onChange={handleInputChange}
+            onChange={this.handleInputChange}
             validators={['required', 'isColorNameUnique', 'isColorUnique']}
             errorMessages={[
               'This field is required',

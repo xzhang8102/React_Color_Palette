@@ -13,34 +13,17 @@ class CreateNewPalette extends React.Component {
 
   state = {
     open: false,
-    newColorName: '', // the name of the generated new color
-    currentColor: '#aaaaaa', // color selected from the color picker
-    palette: this.props.palettes[0].colors // keep record of the user-generated color, {color: '', name: ''}
+    palette: this.props.palettes[0].colors
+    // keep record of the user-generated color, {color: '', name: ''}
   };
 
   handleDrawer = () => {
     this.setState(prevState => ({ open: !prevState.open }));
   };
 
-  // sync 'Add Color' button color with the color picker
-  updateCurrentColor = newColor => {
-    this.setState({ currentColor: newColor.hex });
-  };
-
-  updatePalette = () => {
-    const newColor = {
-      name: this.state.newColorName,
-      color: this.state.currentColor
-    };
+  updatePalette = newColor => {
     this.setState({
-      palette: [...this.state.palette, newColor],
-      newColorName: ''
-    });
-  };
-
-  handleInputChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
+      palette: [...this.state.palette, newColor]
     });
   };
 
@@ -76,12 +59,11 @@ class CreateNewPalette extends React.Component {
 
   render() {
     const { classes, maxColorNums, palettes } = this.props;
-    const { open, currentColor, palette, newColorName } = this.state;
+    const { open, palette } = this.state;
     return (
       <div className={classes.root}>
         <CreateNewPaletteNav
           open={open}
-          classes={classes}
           handleDrawer={this.handleDrawer}
           palette={palette}
           palettes={palettes}
@@ -93,14 +75,9 @@ class CreateNewPalette extends React.Component {
           classes={classes}
           maxColorNums={maxColorNums}
           palette={palette}
-          palettes={palettes}
-          currentColor={currentColor}
-          newColorName={newColorName}
           handleDrawer={this.handleDrawer}
           clearPalette={this.clearPalette}
           addRandomColor={this.addRandomColor}
-          handleInputChange={this.handleInputChange}
-          updateCurrentColor={this.updateCurrentColor}
           updatePalette={this.updatePalette}
         />
         <CreateNewPaletteContent
