@@ -29,7 +29,7 @@ const styles = theme => ({
     ...theme.mixins.toolbar
   },
   container: {
-    width: '90%',
+    width: '80%',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -157,7 +157,6 @@ class CreateNewPaletteDrawer extends Component {
               value={newColorName}
               name="newColorName"
               label="New Color Name"
-              variant="filled"
               margin="normal"
               onChange={this.handleInputChange}
               validators={['required', 'isColorNameUnique', 'isColorUnique']}

@@ -8,6 +8,7 @@ const styles = theme => ({
     }),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     height: '64px'
   },
   appBarShift: {
@@ -25,10 +26,9 @@ const styles = theme => ({
     display: 'none'
   },
   navBtns: {
-    display: 'flex',
-    alignItems: 'center',
+    marginRight: '1rem',
     '& button': {
-      margin: '0 1rem'
+      marginLeft: '1rem'
     }
   }
 });

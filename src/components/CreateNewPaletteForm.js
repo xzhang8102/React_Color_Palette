@@ -46,45 +46,43 @@ class CreateNewPaletteForm extends Component {
     const { open, handleClose } = this.props;
     const { newPaletteName } = this.state;
     return (
-      <div>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <ValidatorForm onSubmit={this.submitPalette}>
+          <DialogTitle id="form-dialog-title">Enter Palette Name</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              To save the current palette, you need to enter a unique name and
+              pick an emoji afterwards.
             </DialogContentText>
-            <ValidatorForm onSubmit={this.submitPalette}>
-              <TextValidator
-                label="New Palette Name"
-                name="newPaletteName"
-                value={newPaletteName}
-                onChange={this.handleInputChange}
-                validators={['required', 'isPaletteUnique', 'isPaletteEmpty']}
-                fullWidth
-                errorMessages={[
-                  'This field is required',
-                  'Name existed',
-                  'Add some color in the palette first'
-                ]}
-                autoComplete="off"
-              />
-            </ValidatorForm>
+            <TextValidator
+              name="newPaletteName"
+              value={newPaletteName}
+              onChange={this.handleInputChange}
+              validators={['required', 'isPaletteUnique', 'isPaletteEmpty']}
+              autoFocus
+              fullWidth
+              errorMessages={[
+                'This field is required',
+                'Name existed',
+                'Add some color in the palette first'
+              ]}
+              autoComplete="off"
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
-              Subscribe
+            <Button color="primary" type="submit">
+              Save
             </Button>
           </DialogActions>
-        </Dialog>
-      </div>
+        </ValidatorForm>
+      </Dialog>
     );
   }
 }
