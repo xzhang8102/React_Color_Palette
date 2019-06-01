@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+import screenSizes from './screenSizes';
 
 const styles = {
   colorBox: {
@@ -16,6 +17,18 @@ const styles = {
     '&:hover button': {
       opacity: '1',
       transition: '0.5s'
+    },
+    [screenSizes.down('lg')]: {
+      width: '25%',
+      height: props => (props.detailedUrl ? '20%' : '50%')
+    },
+    [screenSizes.down('md')]: {
+      width: '50%',
+      height: props => (props.detailedUrl ? '10%' : '50%')
+    },
+    [screenSizes.down('sm')]: {
+      width: '100%',
+      height: props => (props.detailedUrl ? '5%' : '50%')
     }
   },
   colorName: {
