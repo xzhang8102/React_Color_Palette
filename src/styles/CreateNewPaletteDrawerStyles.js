@@ -1,14 +1,21 @@
 import { DRAWER_WIDTH as drawerWidth } from '../constants';
+import screenSizes from './screenSizes';
 
 const styles = theme => ({
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    [screenSizes.down('sm')]: {
+      width: drawerWidth - 150
+    }
   },
   drawerPaper: {
     width: drawerWidth,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    [screenSizes.down('sm')]: {
+      width: drawerWidth - 150
+    }
   },
   drawerHeader: {
     display: 'flex',

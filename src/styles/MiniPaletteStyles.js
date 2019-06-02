@@ -1,7 +1,7 @@
 export default {
   root: {
     backgroundColor: 'white',
-    borderRadius: '.5rem',
+    borderRadius: '0.3rem',
     position: 'relative',
     overflow: 'hidden',
     padding: '0.8rem 0.8rem 0 0.8rem',
@@ -48,7 +48,7 @@ export default {
     backgroundColor: '#eb3d30',
     width: '2rem',
     height: '2rem',
-    padding: '.3rem',
+    padding: '0.3rem',
     zIndex: 20,
     position: 'absolute',
     right: 0,

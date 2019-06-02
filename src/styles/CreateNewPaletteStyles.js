@@ -1,4 +1,5 @@
-const drawerWidth = 400;
+import { DRAWER_WIDTH as drawerWidth } from '../constants';
+import screenSizes from './screenSizes';
 
 const styles = theme => ({
   root: {
@@ -19,7 +20,10 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
+    [screenSizes.down('sm')]: {
+      marginLeft: -(drawerWidth - 150)
+    }
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

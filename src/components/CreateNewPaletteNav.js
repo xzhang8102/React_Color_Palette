@@ -53,7 +53,7 @@ class CreateNewPaletteNav extends Component {
             >
               <FormatColorFill />
             </IconButton>
-            <Typography variant="h5" noWrap>
+            <Typography variant="h5" noWrap className={classes.title}>
               Create Your Palette
             </Typography>
           </Toolbar>

@@ -1,12 +1,16 @@
 import screenSizes from './screenSizes';
+import bg from './paletteListBackground.svg';
 
 export default {
   root: {
-    backgroundColor: '#03a2ec',
+    backgroundColor: '#394bad',
+    backgroundImage: `url(${bg})`,
     height: '100vh',
+    overflow: 'scroll',
     display: 'flex',
     alignItems: 'flex-start',
     justifyContent: 'center'
+    // background by SVGBackgrounds.com
   },
   container: {
     width: '55%',
@@ -29,8 +33,17 @@ export default {
     alignItems: 'center',
     width: '100%',
     color: 'white',
+    padding: '1rem 1.3rem 1rem 0',
+    '& h1': {
+      fontSize: '1.8rem'
+    },
     '& a': {
-      color: 'white'
+      fontSize: '1.2rem',
+      color: 'white',
+      padding: '0.6rem',
+      textDecoration: 'none',
+      border: '0.1rem solid white',
+      borderRadius: '0.2rem'
     }
   },
   palettes: {
