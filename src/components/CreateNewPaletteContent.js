@@ -17,6 +17,7 @@ class CreateNewPaletteContent extends React.Component {
           removeColor={removeColor}
           axis="xy"
           onSortEnd={onSortEnd}
+          distance={20}
         />
       </main>
     );
