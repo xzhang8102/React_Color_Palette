@@ -2,6 +2,16 @@ import screenSizes from './screenSizes';
 import bg from './paletteListBackground.svg';
 
 export default {
+  '@global': {
+    '.fade-exit': {
+      opacity: 1
+    },
+    '.fade-exit-active': {
+      opacity: 0,
+      transition: 'opacity 0.5s ease-out'
+    }
+  },
+
   root: {
     backgroundColor: '#394bad',
     backgroundImage: `url(${bg})`,
@@ -33,7 +43,7 @@ export default {
     alignItems: 'center',
     width: '100%',
     color: 'white',
-    padding: '1rem 1.3rem 1rem 0',
+    padding: '1rem 0',
     '& h1': {
       fontSize: '1.8rem'
     },
@@ -44,6 +54,13 @@ export default {
       textDecoration: 'none',
       border: '0.1rem solid white',
       borderRadius: '0.2rem'
+    },
+    [screenSizes.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      '& a': {
+        alignSelf: 'flex-end'
+      }
     }
   },
   palettes: {
