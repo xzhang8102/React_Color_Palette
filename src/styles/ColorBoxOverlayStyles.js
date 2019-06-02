@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+import screenSizes from './screenSizes';
 
 const styles = {
   copyOverlay: {
@@ -43,7 +44,10 @@ const styles = {
       textAlign: 'center',
       marginBottom: '1rem',
       padding: '1rem',
-      letterSpacing: '0.3rem'
+      letterSpacing: '0.3rem',
+      [screenSizes.down('xs')]: {
+        fontSize: '5rem'
+      }
     },
     '& p': {
       textAlign: 'center',

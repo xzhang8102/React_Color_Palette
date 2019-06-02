@@ -20,15 +20,15 @@ const styles = {
     },
     [screenSizes.down('lg')]: {
       width: '25%',
-      height: props => (props.detailedUrl ? '20%' : '50%')
+      height: props => (props.detailedUrl ? '20%' : '33.3333%')
     },
     [screenSizes.down('md')]: {
       width: '50%',
-      height: props => (props.detailedUrl ? '10%' : '50%')
+      height: props => (props.detailedUrl ? '10%' : '20%')
     },
-    [screenSizes.down('sm')]: {
+    [screenSizes.down('xs')]: {
       width: '100%',
-      height: props => (props.detailedUrl ? '5%' : '50%')
+      height: props => (props.detailedUrl ? '5%' : '10%')
     }
   },
   colorName: {
@@ -61,7 +61,15 @@ const styles = {
     border: 'none',
     opacity: '0',
     cursor: 'pointer',
-    backfaceVisibility: 'hidden'
+    backfaceVisibility: 'hidden',
+    [screenSizes.down('md')]: {
+      width: '25%',
+      height: '50%'
+    },
+    [screenSizes.down('xs')]: {
+      width: '30%',
+      height: '80%'
+    }
   },
   seeMore: {
     color: props =>

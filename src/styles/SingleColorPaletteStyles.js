@@ -1,4 +1,5 @@
 import PaletteStyles from './PaletteStyles';
+import screenSizes from './screenSizes';
 
 const styles = {
   ...PaletteStyles,
@@ -12,6 +13,18 @@ const styles = {
       top: '-0.5rem',
       left: '-0.5rem',
       boxShadow: '0.3rem 0.3rem 0.1rem grey'
+    },
+    [screenSizes.down('lg')]: {
+      width: '25%',
+      height: '33.3333%'
+    },
+    [screenSizes.down('md')]: {
+      width: '50%',
+      height: '20%'
+    },
+    [screenSizes.down('xs')]: {
+      width: '100%',
+      height: '10%'
     }
   },
   backButton: {
