@@ -1,4 +1,5 @@
 import { DRAWER_WIDTH as drawerWidth } from '../constants';
+import screenSizes from './screenSizes';
 
 const styles = theme => ({
   appBar: {
@@ -29,6 +30,12 @@ const styles = theme => ({
     marginRight: '1rem',
     '& button': {
       marginLeft: '1rem'
+    },
+    [screenSizes.down('xs')]: {
+      marginRight: '0.2rem',
+      '& button': {
+        marginLeft: '0.2rem'
+      }
     }
   }
 });

@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/styles';
 import { SortableElement } from 'react-sortable-hoc';
 import chroma from 'chroma-js';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
+import screenSizes from '../styles/screenSizes';
 
 const styles = {
   root: {
@@ -10,7 +11,19 @@ const styles = {
     width: '20%',
     position: 'relative',
     display: 'inline-block',
-    cursor: 'move'
+    cursor: 'move',
+    [screenSizes.down('lg')]: {
+      width: '25%',
+      height: '20%'
+    },
+    [screenSizes.down('md')]: {
+      width: '50%',
+      height: '10%'
+    },
+    [screenSizes.down('sm')]: {
+      width: '100%',
+      height: '5%'
+    }
   },
   boxContent: {
     position: 'absolute',
@@ -25,7 +38,10 @@ const styles = {
     width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
-    fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'
+    fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
+    [screenSizes.down('sm')]: {
+      padding: '0 0.2rem'
+    }
   },
   deleteIcon: {
     transition: 'all 0.2s ease-in-out',
@@ -33,6 +49,13 @@ const styles = {
       color: 'white',
       transform: 'scale(1.4)',
       cursor: 'pointer'
+    },
+    [screenSizes.down('sm')]: {
+      '&:hover': {
+        color: 'white',
+        transform: 'scale(1.2)',
+        cursor: 'pointer'
+      }
     }
   }
 };

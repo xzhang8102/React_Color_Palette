@@ -54,7 +54,7 @@ class CreateNewPaletteNav extends Component {
               <FormatColorFill />
             </IconButton>
             <Typography variant="h5" noWrap>
-              Create Your Own Palette
+              Create Your Palette
             </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
@@ -71,7 +71,7 @@ class CreateNewPaletteNav extends Component {
               color="primary"
               onClick={this.handleClick}
             >
-              Save Palette
+              Save
             </Button>
             <Button
               onClick={() => history.push('/')}
