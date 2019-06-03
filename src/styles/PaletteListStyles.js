@@ -1,5 +1,5 @@
 import screenSizes from './screenSizes';
-import bg from './paletteListBackground.svg';
+import bg from './paletteListBackground';
 
 export default {
   '@global': {
@@ -13,7 +13,7 @@ export default {
   },
   root: {
     backgroundColor: '#394bad',
-    backgroundImage: `url(${bg})`,
+    backgroundImage: `${bg}`,
     height: '100vh',
     overflow: 'scroll',
     display: 'flex',
@@ -54,7 +54,7 @@ export default {
       flexDirection: 'column',
       alignItems: 'flex-start',
       '& a': {
-        alignSelf: 'flex-end'
+        margin: '1rem 0 0.5rem 0'
       }
     }
   },
