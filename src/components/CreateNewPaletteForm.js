@@ -55,6 +55,7 @@ class CreateNewPaletteForm extends Component {
     };
     this.props.savePalette(newPalette);
     this.props.history.push('/');
+    this.setState({ showEmojiPicker: false }, this.props.handleClose);
   };
 
   render() {

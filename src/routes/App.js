@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { withStyles } from '@material-ui/styles';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import Page from '../components/RouteAnimationWrapper';
 import Palette from './Palette';
 import PaletteList from './PaletteList';
 import CreateNewPalette from './CreateNewPalette';
@@ -47,7 +48,6 @@ class App extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
     return (
       <BrowserRouter>
         <Route
@@ -64,13 +64,13 @@ class App extends React.Component {
                     exact
                     path="/palette/new"
                     render={routeProps => (
-                      <div className={classes.page}>
+                      <Page>
                         <CreateNewPalette
                           savePalette={this.savePalette}
                           palettes={this.state.palettes}
                           {...routeProps}
                         />
-                      </div>
+                      </Page>
                     )}
                   />
                   {/* front page with all snapshots of existing palette */}
@@ -78,13 +78,13 @@ class App extends React.Component {
                     exact
                     path="/"
                     render={routeProps => (
-                      <div className={classes.page}>
+                      <Page>
                         <PaletteList
                           palettes={this.state.palettes}
                           {...routeProps}
                           deletePalette={this.deletePalette}
                         />
-                      </div>
+                      </Page>
                     )}
                   />
                   {/* display the detailed palette page when click on the front page */}
@@ -92,13 +92,13 @@ class App extends React.Component {
                     exact
                     path="/palette/:id"
                     render={routeProps => (
-                      <div className={classes.page}>
+                      <Page>
                         <Palette
                           palette={generatePalette(
                             this.findPalette(routeProps.match.params.id)
                           )}
                         />
-                      </div>
+                      </Page>
                     )}
                   />
                   {/* display the detailed color palette page when click on the palette page */}
@@ -106,14 +106,14 @@ class App extends React.Component {
                     exact
                     path="/palette/:paletteId/:colorId"
                     render={routeProps => (
-                      <div className={classes.page}>
+                      <Page>
                         <SingleColorPalette
                           selectedColor={routeProps.match.params.colorId}
                           palette={generatePalette(
                             this.findPalette(routeProps.match.params.paletteId)
                           )}
                         />
-                      </div>
+                      </Page>
                     )}
                   />
                 </Switch>

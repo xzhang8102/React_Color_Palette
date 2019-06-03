@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/styles';
+import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import MiniPalette from '../components/MiniPalette';
@@ -16,8 +17,10 @@ class PaletteList extends Component {
       <div className={classes.root}>
         <div className={classes.container}>
           <nav className={classes.nav}>
-            <h1>React Palette</h1>
-            <Link to="/palette/new">Create New Palette</Link>
+            <Typography variant="h4">React Palette</Typography>
+            <Link to="/palette/new">
+              <Typography variant="h6">Create New Palette</Typography>
+            </Link>
           </nav>
           <TransitionGroup className={classes.palettes}>
             {palettes.map(palette => (

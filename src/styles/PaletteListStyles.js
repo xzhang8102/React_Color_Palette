@@ -11,7 +11,6 @@ export default {
       transition: 'opacity 0.5s ease-out'
     }
   },
-
   root: {
     backgroundColor: '#394bad',
     backgroundImage: `url(${bg})`,
@@ -44,13 +43,9 @@ export default {
     width: '100%',
     color: 'white',
     padding: '1rem 0',
-    '& h1': {
-      fontSize: '1.8rem'
-    },
     '& a': {
-      fontSize: '1.2rem',
       color: 'white',
-      padding: '0.6rem',
+      padding: '0.4rem',
       textDecoration: 'none',
       border: '0.1rem solid white',
       borderRadius: '0.2rem'
