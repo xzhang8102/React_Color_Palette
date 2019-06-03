@@ -116,6 +116,18 @@ class App extends React.Component {
                       </Page>
                     )}
                   />
+                  {/* when invalid url is entered */}
+                  <Route
+                    render={routeProps => (
+                      <Page>
+                        <PaletteList
+                          palettes={this.state.palettes}
+                          {...routeProps}
+                          deletePalette={this.deletePalette}
+                        />
+                      </Page>
+                    )}
+                  />
                 </Switch>
               </CSSTransition>
             </TransitionGroup>
