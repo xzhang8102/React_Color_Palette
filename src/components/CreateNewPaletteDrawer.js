@@ -105,7 +105,7 @@ class CreateNewPaletteDrawer extends Component {
             width="100%"
             className={classes.colorPicker}
           />
-          <ValidatorForm onSubmit={this.addNewColor}>
+          <ValidatorForm onSubmit={this.addNewColor} instantValidate={false}>
             <TextValidator
               value={newColorName}
               name="newColorName"

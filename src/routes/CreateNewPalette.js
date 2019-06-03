@@ -5,6 +5,7 @@ import CreateNewPaletteNav from '../components/CreateNewPaletteNav';
 import CreateNewPaletteDrawer from '../components/CreateNewPaletteDrawer';
 import CreateNewPaletteContent from '../components/CreateNewPaletteContent';
 import styles from '../styles/CreateNewPaletteStyles';
+import seedColor from '../seedColor';
 
 class CreateNewPalette extends React.Component {
   static defaultProps = {
@@ -13,7 +14,7 @@ class CreateNewPalette extends React.Component {
 
   state = {
     open: false,
-    palette: this.props.palettes[0].colors
+    palette: seedColor[0].colors
     // keep record of the user-generated color, {color: '', name: ''}
   };
 
@@ -32,7 +33,7 @@ class CreateNewPalette extends React.Component {
   };
 
   addRandomColor = () => {
-    const allColors = this.props.palettes.map(palette => palette.colors).flat();
+    const allColors = seedColor.map(palette => palette.colors).flat();
     const unique = new Set(this.state.palette.map(color => color.name));
     let rand;
     do {
