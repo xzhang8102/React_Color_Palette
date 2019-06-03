@@ -8,6 +8,11 @@ const styles = {
     html: {
       fontSize: '62.5%'
     }
+  },
+  page: {
+    height: '100vh',
+    width: '100%',
+    position: 'fixed'
   }
 };
 
