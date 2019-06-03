@@ -55,10 +55,7 @@ const styles = {
       height: '1.2rem',
       marginTop: '-0.3rem'
     },
-    [screenSizes.down('md')]: {
-      width: '18rem'
-    },
-    [screenSizes.down('xs')]: {
+    [screenSizes.down('sm')]: {
       width: '18rem'
     }
   },
